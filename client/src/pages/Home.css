@@ -12,7 +12,7 @@
 .arrow-up {
     position: absolute;
     right: 20%;
-    top: 27%;
+    top: 29%;
     width: 0; 
     height: 0; 
     border-left: 7.5px solid transparent;
@@ -23,7 +23,7 @@
 .arrow-down {
     position: absolute;
     right: 20%;
-    bottom: 27%;
+    bottom: 29%;
     width: 0; 
     height: 0; 
     border-left: 7.5px solid transparent;
@@ -36,6 +36,7 @@
 .filter-playlist {
     background-color: lightgrey;
     padding: 10px;
+    border-radius: 5px;
 }
 .filter-playlist select {
     margin-bottom: 20px 
