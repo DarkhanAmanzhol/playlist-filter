@@ -6,10 +6,8 @@
     position: relative;
 }
 
-.arrows {
-    cursor: pointer;
-}
 .arrow-up {
+    cursor: pointer;
     position: absolute;
     right: 20%;
     top: 29%;
@@ -21,6 +19,7 @@
     border-bottom: 7.5px solid black;
 }
 .arrow-down {
+    cursor: pointer;
     position: absolute;
     right: 20%;
     bottom: 29%;

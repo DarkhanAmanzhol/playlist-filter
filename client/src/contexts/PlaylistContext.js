@@ -60,7 +60,6 @@ function PlaylistContextProvider(props) {
     let newPlaylist = playlist;
 
     if (value === "All") {
-      console.log("You Chose All value");
       const response = await axios.get("/api/playlist");
       newPlaylist = response.data.playlist;
     }
