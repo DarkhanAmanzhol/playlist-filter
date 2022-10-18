@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
+import ArrowSortPlaylist from "../playlists/ArrowSortPlaylist";
 
 function TablePlaylist() {
   const [type, setType] = useState({ name: "singer", order: 1 });
+
+  const prevType = useRef("singer");
+
+  // To check prev type and current, if they are not equal, then order should be start from ASC order, otherwise DESC order
+  useEffect(() => {
+    if (prevType.current !== type.name) {
+      setType({ ...type, order: 1 });
+    }
+  }, [type]);
+
   return (
     <PlaylistContext.Consumer>
       {({ playlist }) => {
@@ -13,125 +24,39 @@ function TablePlaylist() {
                 <th scope="col">#</th>
                 <th scope="col">
                   Singer
-                  <div
-                    className="arrows"
-                    onClick={() =>
-                      setType({ name: "singer", order: type.order * -1 })
-                    }
-                  >
-                    <div
-                      className="arrow-up"
-                      style={
-                        type.order === 1 && type.name === "singer"
-                          ? {
-                              width: "100%",
-                              height: "100%",
-                              visibility: "hidden",
-                            }
-                          : {
-                              visibility: "visible",
-                            }
-                      }
-                    ></div>
-                    <div
-                      className="arrow-down"
-                      style={
-                        type.order === -1 && type.name === "singer"
-                          ? {
-                              width: "100%",
-                              height: "100%",
-                              visibility: "hidden",
-                            }
-                          : {
-                              visibility: "visible",
-                            }
-                      }
-                    ></div>
-                  </div>
+                  <ArrowSortPlaylist
+                    nameColumn={"singer"}
+                    type={type}
+                    prevType={prevType}
+                    setType={setType}
+                  />
                 </th>
                 <th scope="col">
                   Song
-                  <div
-                    className="arrows"
-                    onClick={() =>
-                      setType({ name: "song", order: type.order * -1 })
-                    }
-                  >
-                    <div
-                      className="arrow-up"
-                      style={{
-                        visibility:
-                          type.order === 1 && type.name === "song"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                    <div
-                      className="arrow-down"
-                      style={{
-                        visibility:
-                          type.order === -1 && type.name === "song"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                  </div>
+                  <ArrowSortPlaylist
+                    nameColumn={"song"}
+                    type={type}
+                    prevType={prevType}
+                    setType={setType}
+                  />
                 </th>
                 <th scope="col">
                   Genre
-                  <div
-                    className="arrows"
-                    onClick={() =>
-                      setType({ name: "genre", order: type.order * -1 })
-                    }
-                  >
-                    <div
-                      className="arrow-up"
-                      style={{
-                        visibility:
-                          type.order === 1 && type.name === "genre"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                    <div
-                      className="arrow-down"
-                      style={{
-                        visibility:
-                          type.order === -1 && type.name === "genre"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                  </div>
+                  <ArrowSortPlaylist
+                    nameColumn={"genre"}
+                    type={type}
+                    prevType={prevType}
+                    setType={setType}
+                  />
                 </th>
                 <th scope="col">
                   Year
-                  <div
-                    className="arrows"
-                    onClick={() =>
-                      setType({ name: "year", order: type.order * -1 })
-                    }
-                  >
-                    <div
-                      className="arrow-up"
-                      style={{
-                        visibility:
-                          type.order === 1 && type.name === "year"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                    <div
-                      className="arrow-down"
-                      style={{
-                        visibility:
-                          type.order === -1 && type.name === "year"
-                            ? "hidden"
-                            : "visible",
-                      }}
-                    ></div>
-                  </div>
+                  <ArrowSortPlaylist
+                    nameColumn={"year"}
+                    type={type}
+                    prevType={prevType}
+                    setType={setType}
+                  />
                 </th>
               </tr>
             </thead>

@@ -6,32 +6,6 @@
     position: relative;
 }
 
-.arrow-up {
-    cursor: pointer;
-    position: absolute;
-    right: 20%;
-    top: 29%;
-    width: 0; 
-    height: 0; 
-    border-left: 7.5px solid transparent;
-    border-right: 7.5px solid transparent;
-    
-    border-bottom: 7.5px solid black;
-}
-.arrow-down {
-    cursor: pointer;
-    position: absolute;
-    right: 20%;
-    bottom: 29%;
-    width: 0; 
-    height: 0; 
-    border-left: 7.5px solid transparent;
-    border-right: 7.5px solid transparent;
-    
-    border-top: 7.5px solid grey;
-}
-
-
 .filter-playlist {
     background-color: lightgrey;
     padding: 10px;
@@ -39,4 +13,12 @@
 }
 .filter-playlist select {
     margin-bottom: 20px 
+}
+
+
+.arrows img{
+    width: 20px;
+    position: absolute;
+    top: 30%;
+    right: 10%
 }

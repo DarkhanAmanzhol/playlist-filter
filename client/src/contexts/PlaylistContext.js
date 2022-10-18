@@ -16,6 +16,7 @@ function PlaylistContextProvider(props) {
     year: "All",
   });
 
+  // Fetching data from API
   useEffect(() => {
     const fetchAllPlaylist = async () => {
       const response = await axios.get("/api/playlist");
@@ -26,6 +27,7 @@ function PlaylistContextProvider(props) {
     fetchAllPlaylist();
   }, []);
 
+  // Unique singers, genres, years
   useEffect(() => {
     let singersWithDuplicates = [];
     let genresWithDuplicates = [];
@@ -50,6 +52,7 @@ function PlaylistContextProvider(props) {
     });
   }, [playlist]);
 
+  // For sorting playlists than fetched
   const onSelectedFilters = async (event) => {
     const { name, value } = event.target;
 
