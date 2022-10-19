@@ -6,6 +6,7 @@ async function getPlaylist() {
 }
 
 async function postMusic({ singer, song, genre, year }) {
+  if (!singer || !song || !genre || !year) return false;
   const response = await pool.query(
     "INSERT INTO playlist (singer, song, genre, year) values ($1, $2, $3, $4) RETURNING *",
     [singer, song, genre, year]
