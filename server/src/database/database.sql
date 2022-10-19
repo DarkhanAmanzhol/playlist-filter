@@ -13,4 +13,5 @@ create TABLE playlist(
 --     "year": "1991"
 -- }
 
-INSERT INTO playlist ()
+INSERT INTO playlist (singer, song, genre, year) 
+VALUES ('Nirvana', 'Some random song', 'blues', 1990);
