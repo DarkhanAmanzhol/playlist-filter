@@ -11,7 +11,7 @@ RUN npm install --prefix client --only=production
 COPY server/ server/
 
 COPY client/ client/
-RUN npm run build --prefix client
+RUN npm run client-build --prefix client
 
 CMD ["npm", "start"]
 
