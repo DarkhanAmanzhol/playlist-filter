@@ -56,6 +56,7 @@ From the source code, use these commands to start your project:
 
 If all went well, the project should be available in the port <a href="http://localhost:5000/">5000</a>.
 
-Docker files: This images work with AWS Cloud PostgreSq, so need internet.
-<a href="https://hub.docker.com/r/mentallin/playlist-filter">docker image with server and client itself and build (520MB)</a>
-<a href="https://hub.docker.com/r/mentallin/playlist-filter-lightweight">docker image with server and build (122MB)</a>
+##### Docker files: This images work with AWS Cloud PostgreSq, so need internet.
+
+- <a href="https://hub.docker.com/r/mentallin/playlist-filter">docker image with server and client itself and build (520MB)</a>
+- <a href="https://hub.docker.com/r/mentallin/playlist-filter-lightweight">docker image with server and build (122MB)</a>
