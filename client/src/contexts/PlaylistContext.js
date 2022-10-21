@@ -17,13 +17,13 @@ function PlaylistContextProvider(props) {
   });
 
   // Fetching data from API
-  useEffect(() => {
-    const fetchAllPlaylist = async () => {
-      const response = await axios.get("/api/playlist");
-      const playlistData = response.data.playlist;
-      setPlaylist(playlistData);
-    };
+  const fetchAllPlaylist = async () => {
+    const response = await axios.get("/api/playlist");
+    const playlistData = response.data.playlist;
+    setPlaylist(playlistData);
+  };
 
+  useEffect(() => {
     fetchAllPlaylist();
   }, []);
 
@@ -51,6 +51,17 @@ function PlaylistContextProvider(props) {
       years: [...new Set(yearsWithDuplicates)],
     });
   }, [playlist]);
+
+  // Clear Filter by click button
+  const onClearFilters = () => {
+    fetchAllPlaylist();
+    setSelectedFilters({
+      singer: "All",
+      genre: "All",
+      year: "All",
+    });
+    console.log(selectedFilters);
+  };
 
   // For sorting playlists than fetched
   const onSelectedFilters = async (event) => {
@@ -87,7 +98,15 @@ function PlaylistContextProvider(props) {
   };
 
   return (
-    <PlaylistContext.Provider value={{ playlist, filters, onSelectedFilters }}>
+    <PlaylistContext.Provider
+      value={{
+        playlist,
+        filters,
+        onSelectedFilters,
+        selectedFilters,
+        onClearFilters,
+      }}
+    >
       {props.children}
     </PlaylistContext.Provider>
   );

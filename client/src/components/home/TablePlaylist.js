@@ -1,3 +1,4 @@
+// css is global path: /client/src/pages/Home.css
 import React, { useEffect, useRef, useState } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
 import ArrowSortPlaylist from "../playlists/ArrowSortPlaylist";

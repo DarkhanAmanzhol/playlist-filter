@@ -1,3 +1,4 @@
+// css is global path: /client/src/pages/Home.css
 import React from "react";
 import triangleDownSvg from "../../images/triangle-down.svg";
 import triangleUpSvg from "../../images/triangle-up.svg";
