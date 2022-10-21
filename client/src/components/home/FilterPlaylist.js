@@ -1,10 +1,11 @@
+// css is global path: /client/src/pages/Home.css
 import React, { useEffect, useState } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
 
 function FilterPlaylist() {
   return (
     <PlaylistContext.Consumer>
-      {({ filters, onSelectedFilters }) => {
+      {({ filters, onSelectedFilters, selectedFilters, onClearFilters }) => {
         return (
           <div className="filter-playlist">
             <span>Singer</span>
@@ -12,6 +13,7 @@ function FilterPlaylist() {
               className="form-select"
               aria-label="Default select example"
               name="singer"
+              value={selectedFilters.singer}
               onChange={onSelectedFilters}
             >
               <option defaultValue>All</option>
@@ -27,6 +29,7 @@ function FilterPlaylist() {
               className="form-select"
               aria-label="Default select example"
               name="genre"
+              value={selectedFilters.genre}
               onChange={onSelectedFilters}
             >
               <option defaultValue>All</option>
@@ -42,6 +45,7 @@ function FilterPlaylist() {
               className="form-select"
               aria-label="Default select example"
               name="year"
+              value={selectedFilters.year}
               onChange={onSelectedFilters}
             >
               <option defaultValue>All</option>
@@ -51,6 +55,7 @@ function FilterPlaylist() {
                 </option>
               ))}
             </select>
+            <button onClick={onClearFilters}>Clear filters</button>
           </div>
         );
       }}

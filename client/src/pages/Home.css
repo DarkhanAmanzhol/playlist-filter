@@ -14,7 +14,13 @@
 .filter-playlist select {
     margin-bottom: 20px 
 }
-
+.filter-playlist button {
+    width: 100%;
+    background: yellow;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+}
 
 .arrows img{
     width: 20px;
