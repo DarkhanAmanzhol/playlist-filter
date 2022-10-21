@@ -1,9 +1,11 @@
 # Project - Playlist Filter (React, NodeJS, PostgreSQL) + Set up for the localhost
 
+<b>This project is available in the docker image and can be set up locally</b>
+
 ### 1. How to start this project on localhost.
 
 You must have `Node` and `postgresql` installed on your machine.
-If you don't have them, here are the links: <a href="https://nodejs.org/en/download/">Node</a> and <a href="https://www.postgresqltutorial.com/postgresql-getting-started/">PostgreSQL</a>. <b>Choose the version that suitable to your machine.</b>
+If you don't have them, here are the links: <a href="https://kinsta.com/blog/how-to-install-node-js/">Node</a> and <a href="https://www.postgresqltutorial.com/postgresql-getting-started/">PostgreSQL</a>. <b>Choose the version that suitable to your machine.</b>
 
 ### 2. Configuring the PostgreSql database.
 
@@ -17,15 +19,7 @@ After logging into the shell, please enter each command in turn, as shown below:
 
 `create TABLE playlist( id SERIAL PRIMARY KEY, singer VARCHAR(255), song VARCHAR(255), genre VARCHAR(255), year INTEGER );`
 
-`INSERT INTO playlist (singer, song, genre, year) VALUES ('The Kingston Trio', 'Tom Dooley', 'folk', 1958);`
-
-`INSERT INTO playlist (singer, song, genre, year) VALUES ('led Zeppelin', 'Kashmir', 'rock', 1975);`
-
-`INSERT INTO playlist (singer, song, genre, year) VALUES ('Miles Davis', 'Blue in Green', 'jazz', 1959);`
-
-`INSERT INTO playlist (singer, song, genre, year) VALUES ('Muddy Waters', 'Mannish Boy', 'blues', 1955);`
-
-`INSERT INTO playlist (singer, song, genre, year) VALUES ('Nirvana', 'Smells Like Teen Spirit', 'rock', 1991);`
+`INSERT INTO playlist (singer, song, genre, year) VALUES ('The Kingston Trio', 'Tom Dooley', 'folk', 1958),('led Zeppelin', 'Kashmir', 'rock', 1975), ('Miles Davis', 'Blue in Green', 'jazz', 1959), ('Muddy Waters', 'Mannish Boy', 'blues', 1955), ('Nirvana', 'Smells Like Teen Spirit', 'rock', 1991);`
 
 <i>This is all the data I can give. If you want, you can write more. But this data is more than enough for filtering.</i>
 
