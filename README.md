@@ -42,4 +42,20 @@ From the source code, use these commands to start your project:
 
 `npm run start`
 
+##### Some errors that can occur when you run the project:
+
+1. Cannot Get - no build.
+   If `npm run build --prefix client` command builds the directory on the client, not on the server. Use another command `npm run client-build --prefix client` to fix this. The cause may be related to the operating system. In my case I checked on a VM linux machine. But for Windows first command should work fine.
+
+2. No data in the playlist
+   <a href="http://localhost:5000/api/playlist">First, please check this route when you start to run the project</a>
+   Should appear error in the terminal, possible solutions: Wrong configuration of PostgreSql.
+   Please check the password and other information in the file <b><a href="https://github.com/DarkhanAmanzhol/playlist-filter/blob/master/server/src/database/postgresql.js">postgresql.js</a></b>. Update `pool` configuration.
+
+   If the error still appears, it is better to create a new user. <a href="https://phoenixnap.com/kb/postgres-create-user">Check this link</a>.
+
 If all went well, the project should be available in the port <a href="http://localhost:5000/">5000</a>.
+
+Docker files: This images work with AWS Cloud PostgreSq, so need internet.
+<a href="https://hub.docker.com/r/mentallin/playlist-filter">docker image with server and client itself and build (520MB)</a>
+<a href="https://hub.docker.com/r/mentallin/playlist-filter-lightweight">docker image with server and build (122MB)</a>
