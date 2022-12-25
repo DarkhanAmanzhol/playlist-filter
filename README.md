@@ -2,7 +2,17 @@
 
 <b>This project is available in the docker image and can be set up locally</b>
 
-### 1. How to start this project on localhost.
+---
+
+## Docker compose.
+
+To run use command `docker compose up`. It should automatically create project and postgres images.
+
+Check the <a href="http://localhost:5000/">port 5000</a>.
+
+---
+
+## 1. How to start this project on localhost. (STILL UPDATING THIS PART!!!)
 
 You must have `Node` and `postgresql` installed on your machine.
 If you don't have them, here are the links: <a href="https://kinsta.com/blog/how-to-install-node-js/">Node</a> and <a href="https://www.postgresqltutorial.com/postgresql-getting-started/">PostgreSQL</a>. <b>Choose the version that suitable to your machine.</b>
@@ -55,18 +65,3 @@ From the source code, use these commands to start your project:
    If the error still appears, it is better to create a new user. <a href="https://phoenixnap.com/kb/postgres-create-user">Check this link</a>.
 
 If all went well, the project should be available in the <a href="http://localhost:5000/">port 5000</a>.
-
-##### Docker files: This images work with AWS Cloud PostgreSq, so need internet.
-
-Use docker pull command to download. (Docker should be downloaded in your machine.)
-All you have to do is download 1 of them (Docker Pull Command).
-
-- <a href="https://hub.docker.com/r/mentallin/playlist-filter">docker image with server and client itself and build (520MB)</a>
-- <a href="https://hub.docker.com/r/mentallin/playlist-filter-lightweight">docker image with server and build (122MB)</a>
-
-To run the downloaded docker image, use one of these commands:
-`docker run -it -p 5000:5000 mentallin/playlist-filter`
-or
-`docker run -it -p 5000:5000 mentallin/playlist-filter-lightweight`
-
-In this stage, you do not need any db, because it is available via aws cloud from anywhere. Check the <a href="http://localhost:5000/">port 5000</a>.
