@@ -19,11 +19,11 @@ function TablePlaylist() {
     <PlaylistContext.Consumer>
       {({ playlist }) => {
         return (
-          <table className="table table-striped">
+          <table className='table table-striped'>
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">
+                <th scope='col'>#</th>
+                <th scope='col'>
                   Singer
                   <ArrowSortPlaylist
                     nameColumn={"singer"}
@@ -32,7 +32,7 @@ function TablePlaylist() {
                     setType={setType}
                   />
                 </th>
-                <th scope="col">
+                <th scope='col'>
                   Song
                   <ArrowSortPlaylist
                     nameColumn={"song"}
@@ -41,7 +41,7 @@ function TablePlaylist() {
                     setType={setType}
                   />
                 </th>
-                <th scope="col">
+                <th scope='col'>
                   Genre
                   <ArrowSortPlaylist
                     nameColumn={"genre"}
@@ -50,7 +50,7 @@ function TablePlaylist() {
                     setType={setType}
                   />
                 </th>
-                <th scope="col">
+                <th scope='col'>
                   Year
                   <ArrowSortPlaylist
                     nameColumn={"year"}
@@ -73,8 +73,8 @@ function TablePlaylist() {
                     );
                   }
                 })
-                .map((music) => (
-                  <tr key={music.id}>
+                .map((music, index) => (
+                  <tr key={index + 1}>
                     <td>{music.id}</td>
                     <td>{music.singer}</td>
                     <td>{music.song}</td>
