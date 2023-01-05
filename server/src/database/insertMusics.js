@@ -17,6 +17,4 @@ reducedMusics.forEach((music, index) => {
 
 insertMusics += ` ON CONFLICT (id) DO NOTHING;`;
 
-console.log(insertMusics);
-
 module.exports = insertMusics;

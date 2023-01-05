@@ -7,12 +7,12 @@ function FilterPlaylist() {
     <PlaylistContext.Consumer>
       {({ filters, onSelectedFilters, selectedFilters, onClearFilters }) => {
         return (
-          <div className="filter-playlist">
+          <div className='filter-playlist'>
             <span>Singer</span>
             <select
-              className="form-select"
-              aria-label="Default select example"
-              name="singer"
+              className='form-select'
+              aria-label='Default select example'
+              name='singer'
               value={selectedFilters.singer}
               onChange={onSelectedFilters}
             >
@@ -26,9 +26,9 @@ function FilterPlaylist() {
 
             <span>Genre</span>
             <select
-              className="form-select"
-              aria-label="Default select example"
-              name="genre"
+              className='form-select'
+              aria-label='Default select example'
+              name='genre'
               value={selectedFilters.genre}
               onChange={onSelectedFilters}
             >
@@ -42,9 +42,9 @@ function FilterPlaylist() {
 
             <span>Year</span>
             <select
-              className="form-select"
-              aria-label="Default select example"
-              name="year"
+              className='form-select'
+              aria-label='Default select example'
+              name='year'
               value={selectedFilters.year}
               onChange={onSelectedFilters}
             >
