@@ -1,11 +1,23 @@
-const { getPlaylist, postMusic } = require("../models/playlist.model");
+const {
+  getMusics,
+  getQuantityMusics,
+  getUniqueMusicTypes,
+  postMusic,
+} = require("../models/playlist.model");
 
 async function getPlaylistController(req, res) {
-  const playlist = await getPlaylist();
+  const { page, perPage, column, order } = req.query;
+  const filters = req.body;
+
+  const playlist = await getMusics(page, perPage, column, order, filters);
+  const quantity = await getQuantityMusics(filters);
+  const uniqueTypes = await getUniqueMusicTypes();
 
   return res.status(200).json({
     status: "success",
-    playlist: playlist,
+    quantity,
+    playlist,
+    uniqueTypes,
   });
 }
 

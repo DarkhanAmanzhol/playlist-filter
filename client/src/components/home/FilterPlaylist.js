@@ -1,65 +1,58 @@
 // css is global path: /client/src/pages/Home.css
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
+import Select from "react-select";
+
+const parseToOptionsArray = (array) => {
+  let options = [];
+  for (let i = 0; i < array.length; i++) {
+    options.push({ value: array[i], label: array[i] });
+  }
+  return options;
+};
 
 function FilterPlaylist() {
+  const { uniqueTypes, setSelectedFilters } = useContext(PlaylistContext);
+  const [selectedSingers, setSelectedSingers] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
+  const [selectedYears, setSelectedYears] = useState([]);
+
+  const singerOptions = parseToOptionsArray(uniqueTypes.singers);
+  const genreOptions = parseToOptionsArray(uniqueTypes.genres);
+  const yearOptions = parseToOptionsArray(uniqueTypes.years);
+
+  useEffect(() => {
+    setSelectedFilters({
+      singers: selectedSingers.map((item) => item["value"]),
+      genres: selectedGenres.map((item) => item["value"]),
+      years: selectedYears.map((item) => item["value"]),
+    });
+  }, [selectedSingers, selectedGenres, selectedYears]);
+
   return (
-    <PlaylistContext.Consumer>
-      {({ filters, onSelectedFilters, selectedFilters, onClearFilters }) => {
-        return (
-          <div className="filter-playlist">
-            <span>Singer</span>
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              name="singer"
-              value={selectedFilters.singer}
-              onChange={onSelectedFilters}
-            >
-              <option defaultValue>All</option>
-              {filters.singers.map((singer) => (
-                <option key={singer} value={singer}>
-                  {singer}
-                </option>
-              ))}
-            </select>
-
-            <span>Genre</span>
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              name="genre"
-              value={selectedFilters.genre}
-              onChange={onSelectedFilters}
-            >
-              <option defaultValue>All</option>
-              {filters.genres.map((genre) => (
-                <option key={genre} value={genre}>
-                  {genre}
-                </option>
-              ))}
-            </select>
-
-            <span>Year</span>
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              name="year"
-              value={selectedFilters.year}
-              onChange={onSelectedFilters}
-            >
-              <option defaultValue>All</option>
-              {filters.years.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-            <button onClick={onClearFilters}>Clear filters</button>
-          </div>
-        );
-      }}
-    </PlaylistContext.Consumer>
+    <div className='filter-playlist'>
+      <Select
+        isMulti
+        className='filter-playlist__select'
+        value={selectedSingers}
+        onChange={setSelectedSingers}
+        options={singerOptions}
+      />
+      <Select
+        isMulti
+        className='filter-playlist__select'
+        value={selectedGenres}
+        onChange={setSelectedGenres}
+        options={genreOptions}
+      />
+      <Select
+        isMulti
+        className='filter-playlist__select'
+        value={selectedYears}
+        onChange={setSelectedYears}
+        options={yearOptions}
+      />
+    </div>
   );
 }
 

@@ -1,92 +1,66 @@
 // css is global path: /client/src/pages/Home.css
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
 import ArrowSortPlaylist from "../playlists/ArrowSortPlaylist";
+import ReactPaginate from "react-paginate";
 
 function TablePlaylist() {
-  const [type, setType] = useState({ name: "singer", order: 1 });
-
-  const prevType = useRef("singer");
-
-  // To check prev type and current, if they are not equal, then order should be start from ASC order, otherwise DESC order
-  useEffect(() => {
-    if (prevType.current !== type.name) {
-      setType({ ...type, order: 1 });
-    }
-  }, [type]);
+  const { playlist, pageCount, currentPage, setCurrentPage, dataPerPage, type, handleTypeChange } =
+    useContext(PlaylistContext);
 
   return (
-    <PlaylistContext.Consumer>
-      {({ playlist }) => {
-        return (
-          <table className='table table-striped'>
-            <thead>
-              <tr>
-                <th scope='col'>#</th>
-                <th scope='col'>
-                  Singer
-                  <ArrowSortPlaylist
-                    nameColumn={"singer"}
-                    type={type}
-                    prevType={prevType}
-                    setType={setType}
-                  />
-                </th>
-                <th scope='col'>
-                  Song
-                  <ArrowSortPlaylist
-                    nameColumn={"song"}
-                    type={type}
-                    prevType={prevType}
-                    setType={setType}
-                  />
-                </th>
-                <th scope='col'>
-                  Genre
-                  <ArrowSortPlaylist
-                    nameColumn={"genre"}
-                    type={type}
-                    prevType={prevType}
-                    setType={setType}
-                  />
-                </th>
-                <th scope='col'>
-                  Year
-                  <ArrowSortPlaylist
-                    nameColumn={"year"}
-                    type={type}
-                    prevType={prevType}
-                    setType={setType}
-                  />
-                </th>
+    <>
+      <table className='table table-striped playlist-table'>
+        <thead>
+          <tr>
+            <th scope='col'>#</th>
+            <th scope='col'>
+              Singer
+              <ArrowSortPlaylist nameColumn={"singer"} type={type} onChangeType={handleTypeChange} />
+            </th>
+            <th scope='col'>
+              Song
+              <ArrowSortPlaylist nameColumn={"song"} type={type} onChangeType={handleTypeChange} />
+            </th>
+            <th scope='col'>
+              Genre
+              <ArrowSortPlaylist nameColumn={"genre"} type={type} onChangeType={handleTypeChange} />
+            </th>
+            <th scope='col'>
+              Year
+              <ArrowSortPlaylist nameColumn={"year"} type={type} onChangeType={handleTypeChange} />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {playlist &&
+            playlist.map((music, index) => (
+              <tr key={music.id}>
+                <td>{index + 1 + currentPage * dataPerPage}</td>
+                <td>{music.singer}</td>
+                <td>{music.song}</td>
+                <td>{music.genre}</td>
+                <td>{music.year}</td>
               </tr>
-            </thead>
-            <tbody>
-              {playlist
-                .sort((music1, music2) => {
-                  if (type.name === "year") {
-                    return (music1.year - music2.year) * type.order;
-                  } else {
-                    return (
-                      music1[type.name].localeCompare(music2[type.name]) *
-                      type.order
-                    );
-                  }
-                })
-                .map((music, index) => (
-                  <tr key={index + 1}>
-                    <td>{music.id}</td>
-                    <td>{music.singer}</td>
-                    <td>{music.song}</td>
-                    <td>{music.genre}</td>
-                    <td>{music.year}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        );
-      }}
-    </PlaylistContext.Consumer>
+            ))}
+        </tbody>
+      </table>
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel='next >'
+        onPageChange={(e) => setCurrentPage(e.selected)}
+        forcePage={currentPage | 0}
+        pageRangeDisplayed={10}
+        pageCount={pageCount}
+        previousLabel='< previous'
+        renderOnZeroPageCount={null}
+        containerClassName='pagination'
+        pageLinkClassName='page-num'
+        previousLinkClassName='page-num'
+        nextLinkClassName='page-num'
+        activeLinkClassName='page-num active'
+      />
+    </>
   );
 }
 

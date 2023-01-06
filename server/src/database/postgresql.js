@@ -1,10 +1,18 @@
 const { Pool } = require("pg");
 const insertMusics = require("./insertMusics");
 
+// const pool = new Pool({
+//   host: "postgres-db",
+//   user: "postgres",
+//   password: "123456",
+//   port: 5432,
+//   database: "musics",
+// });
+
 const pool = new Pool({
-  host: "postgres-db",
+  host: "localhost",
   user: "postgres",
-  password: "123456",
+  password: "root",
   port: 5432,
   database: "musics",
 });

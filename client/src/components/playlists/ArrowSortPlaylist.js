@@ -4,24 +4,18 @@ import triangleDownSvg from "../../images/triangle-down.svg";
 import triangleUpSvg from "../../images/triangle-up.svg";
 import doubleTriangle from "../../images/triangles-up-down.svg";
 
-function ArrowSortPlaylist({ nameColumn, type, prevType, setType }) {
+function ArrowSortPlaylist({ nameColumn, type, onChangeType }) {
   return (
-    <div
-      className="arrows"
-      onClick={() => {
-        setType({ name: nameColumn, order: type.order * -1 });
-        prevType.current = type.name;
-      }}
-    >
+    <div className='arrows' onClick={() => onChangeType(nameColumn)}>
       <img
         src={
-          type.name === nameColumn
-            ? type.order === 1
+          type.column === nameColumn
+            ? type.order === "ASC"
               ? triangleDownSvg
               : triangleUpSvg
             : doubleTriangle
         }
-        alt="triangle-svg"
+        alt='triangle-svg'
       />
     </div>
   );
