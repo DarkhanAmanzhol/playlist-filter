@@ -1,19 +1,12 @@
 // css is global path: /client/src/pages/Home.css
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PlaylistContext } from "../../contexts/PlaylistContext";
 import ArrowSortPlaylist from "../playlists/ArrowSortPlaylist";
 import ReactPaginate from "react-paginate";
 
 function TablePlaylist() {
-  const {
-    playlist,
-    pageCount,
-    currentPage,
-    setCurrentPage,
-    dataPerPage,
-    type,
-    handleTypeChange,
-  } = useContext(PlaylistContext);
+  const { playlist, pageCount, currentPage, setCurrentPage, dataPerPage, type, handleTypeChange } =
+    useContext(PlaylistContext);
 
   return (
     <>
@@ -23,35 +16,19 @@ function TablePlaylist() {
             <th scope='col'>#</th>
             <th scope='col'>
               Singer
-              <ArrowSortPlaylist
-                nameColumn={"singer"}
-                type={type}
-                onChangeType={handleTypeChange}
-              />
+              <ArrowSortPlaylist nameColumn={"singer"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Song
-              <ArrowSortPlaylist
-                nameColumn={"song"}
-                type={type}
-                onChangeType={handleTypeChange}
-              />
+              <ArrowSortPlaylist nameColumn={"song"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Genre
-              <ArrowSortPlaylist
-                nameColumn={"genre"}
-                type={type}
-                onChangeType={handleTypeChange}
-              />
+              <ArrowSortPlaylist nameColumn={"genre"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Year
-              <ArrowSortPlaylist
-                nameColumn={"year"}
-                type={type}
-                onChangeType={handleTypeChange}
-              />
+              <ArrowSortPlaylist nameColumn={"year"} type={type} onChangeType={handleTypeChange} />
             </th>
           </tr>
         </thead>
@@ -72,7 +49,7 @@ function TablePlaylist() {
         breakLabel='...'
         nextLabel='next >'
         onPageChange={(e) => setCurrentPage(e.selected)}
-        forcePage={currentPage}
+        forcePage={currentPage | 0}
         pageRangeDisplayed={10}
         pageCount={pageCount}
         previousLabel='< previous'

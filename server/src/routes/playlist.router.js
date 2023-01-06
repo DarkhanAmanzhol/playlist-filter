@@ -3,10 +3,10 @@ const playlistRouter = express.Router();
 
 const {
   getPlaylistController,
-  postMusicController,
+  // postMusicController,
 } = require("../controllers/playlist.controller");
 
-playlistRouter.get("/", getPlaylistController);
-playlistRouter.post("/", postMusicController);
+playlistRouter.post("/", getPlaylistController);
+// playlistRouter.post("/", postMusicController);
 
 module.exports = playlistRouter;

@@ -12,7 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient} contextSharing>
       <PlaylistContextProvider>
         <Routes>
-          <Route path='home' element={<Home />} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </PlaylistContextProvider>
       <ReactQueryDevtools />

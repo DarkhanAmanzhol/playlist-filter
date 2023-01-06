@@ -11,16 +11,11 @@
     padding: 10px;
     border-radius: 5px;
 }
-.filter-playlist select {
-    margin-bottom: 20px 
+
+.filter-playlist__select {
+  padding: 10px;
 }
-.filter-playlist button {
-    width: 100%;
-    background: yellow;
-    border: none;
-    border-radius: 5px;
-    padding: 7px;
-}
+
 
 .arrows img{
     width: 20px;

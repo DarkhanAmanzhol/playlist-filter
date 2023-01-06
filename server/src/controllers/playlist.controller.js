@@ -7,17 +7,17 @@ const {
 
 async function getPlaylistController(req, res) {
   const { page, perPage, column, order } = req.query;
-  console.log(page, perPage, column, order);
+  const filters = req.body;
 
-  const playlist = await getMusics(page, perPage, column, order);
-  const quantity = await getQuantityMusics();
+  const playlist = await getMusics(page, perPage, column, order, filters);
+  const quantity = await getQuantityMusics(filters);
   const uniqueTypes = await getUniqueMusicTypes();
 
   return res.status(200).json({
     status: "success",
     quantity,
+    playlist,
     uniqueTypes,
-    playlist: playlist,
   });
 }
 

@@ -11,11 +11,12 @@ const fetchMusicsByPage = async (
   page = 0,
   perPage = 20,
   column = "singer",
-  order = "ASC"
+  order = "ASC",
+  filters = []
 ) => {
-  console.log(page, perPage, column, order);
-  const response = await axios.get(
-    `/api/playlist?page=${page}&perPage=${perPage}&column=${column}&order=${order}`
+  const response = await axios.post(
+    `/api/playlist?page=${page}&perPage=${perPage}&column=${column}&order=${order}`,
+    filters
   );
 
   return response.data;
@@ -29,6 +30,12 @@ function PlaylistContextProvider(props) {
   const [type, setType] = useState({
     column: searchParams.get("column") || "singer",
     order: searchParams.get("order") || "ASC",
+  });
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    singers: [],
+    genres: [],
+    years: [],
   });
 
   const handleTypeChange = (nameColumn) => {
@@ -51,14 +58,16 @@ function PlaylistContextProvider(props) {
   }, [currentPage, dataPerPage, type]);
 
   const { data, isLoading } = useQuery(
-    ["playlist", currentPage, type.column, type.order],
-    () => fetchMusicsByPage(currentPage, dataPerPage, type.column, type.order)
+    ["playlist", currentPage, type.column, type.order, selectedFilters],
+    () => fetchMusicsByPage(currentPage, dataPerPage, type.column, type.order, selectedFilters),
+    { keepPreviousData: true }
   );
 
   if (isLoading) return <Loading />;
 
   const playlist = data.playlist;
   const quantity = data.quantity;
+  const uniqueTypes = data.uniqueTypes;
 
   const pageCount = Math.ceil(quantity / dataPerPage);
 
@@ -72,6 +81,8 @@ function PlaylistContextProvider(props) {
         dataPerPage,
         type,
         handleTypeChange,
+        uniqueTypes,
+        setSelectedFilters,
       }}
     >
       {props.children}
