@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useSearchParams } from "react-router-dom";
-import Loading from "../components/slider/Loading";
+import Loading from "../components/slider";
 
 export const PlaylistContext = createContext();
 
