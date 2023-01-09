@@ -3,4 +3,5 @@
 .gitignore
 /client/README.md
 /server/database.sql
+/server/web-scraping
 README.md
