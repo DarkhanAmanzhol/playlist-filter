@@ -1,10 +1,11 @@
 // css is global path: /client/src/pages/Home.css
-import React, { useContext, useEffect } from "react";
-import { PlaylistContext } from "../../contexts/PlaylistContext";
-import ArrowSortPlaylist from "../playlists/ArrowSortPlaylist";
+import React, { useContext } from "react";
+import "./style.css";
+import { PlaylistContext } from "contexts/PlaylistContext";
+import ArrowSort from "components/arrow-sort";
 import ReactPaginate from "react-paginate";
 
-function TablePlaylist() {
+function Table() {
   const { playlist, pageCount, currentPage, setCurrentPage, dataPerPage, type, handleTypeChange } =
     useContext(PlaylistContext);
 
@@ -16,19 +17,19 @@ function TablePlaylist() {
             <th scope='col'>#</th>
             <th scope='col'>
               Singer
-              <ArrowSortPlaylist nameColumn={"singer"} type={type} onChangeType={handleTypeChange} />
+              <ArrowSort nameColumn={"singer"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Song
-              <ArrowSortPlaylist nameColumn={"song"} type={type} onChangeType={handleTypeChange} />
+              <ArrowSort nameColumn={"song"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Genre
-              <ArrowSortPlaylist nameColumn={"genre"} type={type} onChangeType={handleTypeChange} />
+              <ArrowSort nameColumn={"genre"} type={type} onChangeType={handleTypeChange} />
             </th>
             <th scope='col'>
               Year
-              <ArrowSortPlaylist nameColumn={"year"} type={type} onChangeType={handleTypeChange} />
+              <ArrowSort nameColumn={"year"} type={type} onChangeType={handleTypeChange} />
             </th>
           </tr>
         </thead>
@@ -64,4 +65,4 @@ function TablePlaylist() {
   );
 }
 
-export default TablePlaylist;
+export default Table;

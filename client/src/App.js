@@ -1,5 +1,5 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Home from "./pages/home";
 import { Route, Routes } from "react-router-dom";
 import PlaylistContextProvider from "./contexts/PlaylistContext";
 import { QueryClient, QueryClientProvider } from "react-query";

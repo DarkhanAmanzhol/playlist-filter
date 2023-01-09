@@ -1,0 +1,9 @@
+.filter-playlist {
+    background-color: lightgrey;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.filter-playlist__select {
+  padding: 10px;
+}

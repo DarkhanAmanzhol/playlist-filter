@@ -1,7 +1,7 @@
 import React from "react";
-import TablePlaylist from "../components/home/TablePlaylist";
-import FilterPlaylist from "../components/home/FilterPlaylist";
-import "./Home.css";
+import Table from "./components/table";
+import Filter from "./components/filter";
+import "./style.css";
 
 function Home() {
   return (
@@ -10,11 +10,11 @@ function Home() {
         <div className='row'>
           <div className='col-9'>
             <h3>Playlist</h3>
-            <TablePlaylist />
+            <Table />
           </div>
           <div className='col-3'>
             <h3>Filter</h3>
-            <FilterPlaylist />
+            <Filter />
           </div>
         </div>
       </div>

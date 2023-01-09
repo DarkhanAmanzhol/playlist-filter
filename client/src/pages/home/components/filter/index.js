@@ -1,17 +1,11 @@
 // css is global path: /client/src/pages/Home.css
 import React, { useContext, useEffect, useState } from "react";
-import { PlaylistContext } from "../../contexts/PlaylistContext";
+import "./style.css";
+import { PlaylistContext } from "contexts/PlaylistContext";
+import { parseToOptionsArray } from "./lib";
 import Select from "react-select";
 
-const parseToOptionsArray = (array) => {
-  let options = [];
-  for (let i = 0; i < array.length; i++) {
-    options.push({ value: array[i], label: array[i] });
-  }
-  return options;
-};
-
-function FilterPlaylist() {
+function Filter() {
   const { uniqueTypes, setSelectedFilters } = useContext(PlaylistContext);
   const [selectedSingers, setSelectedSingers] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
@@ -56,4 +50,4 @@ function FilterPlaylist() {
   );
 }
 
-export default FilterPlaylist;
+export default Filter;

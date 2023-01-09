@@ -1,10 +1,11 @@
 // css is global path: /client/src/pages/Home.css
 import React from "react";
-import triangleDownSvg from "../../images/triangle-down.svg";
-import triangleUpSvg from "../../images/triangle-up.svg";
-import doubleTriangle from "../../images/triangles-up-down.svg";
+import "./style.css";
+import triangleDownSvg from "images/svg/triangle-down.svg";
+import triangleUpSvg from "images/svg/triangle-up.svg";
+import doubleTriangle from "images/svg/triangles-up-down.svg";
 
-function ArrowSortPlaylist({ nameColumn, type, onChangeType }) {
+function ArrowSort({ nameColumn, type, onChangeType }) {
   return (
     <div className='arrows' onClick={() => onChangeType(nameColumn)}>
       <img
@@ -21,4 +22,4 @@ function ArrowSortPlaylist({ nameColumn, type, onChangeType }) {
   );
 }
 
-export default ArrowSortPlaylist;
+export default ArrowSort;
