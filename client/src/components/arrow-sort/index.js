@@ -9,6 +9,7 @@ function ArrowSort({ nameColumn, type, onChangeType }) {
   return (
     <div className="arrows" onClick={() => onChangeType(nameColumn)}>
       <img
+        className="arrows__img"
         src={
           type.column === nameColumn
             ? type.order === "ASC"
