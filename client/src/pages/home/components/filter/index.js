@@ -24,24 +24,24 @@ function Filter() {
   }, [selectedSingers, selectedGenres, selectedYears]);
 
   return (
-    <div className='filter-playlist'>
+    <div className="filter-playlist">
       <Select
         isMulti
-        className='filter-playlist__select'
+        className="filter-playlist__select"
         value={selectedSingers}
         onChange={setSelectedSingers}
         options={singerOptions}
       />
       <Select
         isMulti
-        className='filter-playlist__select'
+        className="filter-playlist__select"
         value={selectedGenres}
         onChange={setSelectedGenres}
         options={genreOptions}
       />
       <Select
         isMulti
-        className='filter-playlist__select'
+        className="filter-playlist__select"
         value={selectedYears}
         onChange={setSelectedYears}
         options={yearOptions}

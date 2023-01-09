@@ -7,7 +7,7 @@ import doubleTriangle from "images/svg/triangles-up-down.svg";
 
 function ArrowSort({ nameColumn, type, onChangeType }) {
   return (
-    <div className='arrows' onClick={() => onChangeType(nameColumn)}>
+    <div className="arrows" onClick={() => onChangeType(nameColumn)}>
       <img
         src={
           type.column === nameColumn
@@ -16,7 +16,7 @@ function ArrowSort({ nameColumn, type, onChangeType }) {
               : triangleUpSvg
             : doubleTriangle
         }
-        alt='triangle-svg'
+        alt="triangle-svg"
       />
     </div>
   );

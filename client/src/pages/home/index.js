@@ -5,14 +5,14 @@ import "./style.css";
 
 function Home() {
   return (
-    <section className='home'>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-9'>
+    <section className="home">
+      <div className="container">
+        <div className="row">
+          <div className="col-9">
             <h3>Playlist</h3>
             <Table />
           </div>
-          <div className='col-3'>
+          <div className="col-3">
             <h3>Filter</h3>
             <Filter />
           </div>
