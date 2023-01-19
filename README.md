@@ -1,3 +1,5 @@
+Experimental
+
 # Project - Playlist Filter (React, NodeJS, PostgreSQL) + Set up for the localhost
 
 <b>This project is available in the docker image and can be set up locally</b>
