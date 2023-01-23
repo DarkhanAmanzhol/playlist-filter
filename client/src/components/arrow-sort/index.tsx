@@ -5,7 +5,16 @@ import triangleDownSvg from "images/svg/triangle-down.svg";
 import triangleUpSvg from "images/svg/triangle-up.svg";
 import doubleTriangle from "images/svg/triangles-up-down.svg";
 
-function ArrowSort({ nameColumn, type, onChangeType }) {
+type Props = {
+  nameColumn: string;
+  type: {
+    column: string;
+    order: string;
+  };
+  onChangeType: (nameColumn: string) => void;
+};
+
+export const ArrowSort: React.FC<Props> = ({ nameColumn, type, onChangeType }) => {
   return (
     <div className="arrows" onClick={() => onChangeType(nameColumn)}>
       <img
@@ -21,6 +30,6 @@ function ArrowSort({ nameColumn, type, onChangeType }) {
       />
     </div>
   );
-}
+};
 
-export default ArrowSort;
+// export default ArrowSort;

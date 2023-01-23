@@ -6,7 +6,10 @@ import { parseToOptionsArray } from "./lib";
 import Select from "react-select";
 
 function Filter() {
-  const { uniqueTypes, setSelectedFilters } = useContext(PlaylistContext);
+  const context = useContext(PlaylistContext);
+  const uniqueTypes = context?.uniqueTypes;
+  const setSelectedFilters = context?.setSelectedFilters;
+
   const [selectedSingers, setSelectedSingers] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [selectedYears, setSelectedYears] = useState([]);
@@ -29,21 +32,21 @@ function Filter() {
         isMulti
         className="filter-playlist__select"
         value={selectedSingers}
-        onChange={setSelectedSingers}
+        onChange={() => setSelectedSingers}
         options={singerOptions}
       />
       <Select
         isMulti
         className="filter-playlist__select"
         value={selectedGenres}
-        onChange={setSelectedGenres}
+        onChange={() => setSelectedGenres}
         options={genreOptions}
       />
       <Select
         isMulti
         className="filter-playlist__select"
         value={selectedYears}
-        onChange={setSelectedYears}
+        onChange={() => setSelectedYears}
         options={yearOptions}
       />
     </div>
