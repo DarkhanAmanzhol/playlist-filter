@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { getMusics, getQuantityMusics, getUniqueMusicTypes, postMusic } from "../models/playlist.model";
 
-export type MusicsType = Query & { filters: Filters };
-
 export type Query = {
   page?: number;
   perPage?: number;
@@ -10,12 +8,12 @@ export type Query = {
   order?: "ASC" | "DESC";
 };
 
-export type MusicProperties = {
+export interface MusicProperties {
   singer: string;
   song: string;
   genre: string;
   year: number;
-};
+}
 
 export type Filters = {
   singers: string[];

@@ -1,6 +1,6 @@
 import pool from "../database/postgresql";
 import { createFilteredQueries } from "./helpers/query.helper";
-import { Filters, MusicProperties, MusicsType } from "../controllers/playlist.controller";
+import { Filters, MusicProperties } from "../controllers/playlist.controller";
 
 async function getMusics(
   page = 0,
@@ -20,7 +20,8 @@ async function getMusics(
       page * perPage
     };`
   );
-  return playlist.rows;
+
+  return playlist.rows as MusicProperties[];
 }
 
 async function getQuantityMusics(filters: Filters) {
@@ -32,7 +33,7 @@ async function getQuantityMusics(filters: Filters) {
 
   const quantity = await pool.query(query);
 
-  return quantity.rows[0].count;
+  return quantity.rows[0].count as number;
 }
 
 async function getUniqueMusicTypes() {
@@ -68,7 +69,7 @@ async function postMusic({ singer, song, genre, year }: MusicProperties) {
     [singer, song, genre, year]
   );
 
-  return response.rows[0];
+  return response.rows[0] as MusicProperties;
 }
 
 export { getMusics, getQuantityMusics, getUniqueMusicTypes, postMusic };

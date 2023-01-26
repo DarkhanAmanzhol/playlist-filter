@@ -5,5 +5,11 @@
 }
 
 .filter-playlist__select {
-  padding: 10px;
+  padding: 5px;
+}
+
+.filter-playlist__label {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 0 0 5px;
 }

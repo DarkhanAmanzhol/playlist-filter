@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/dist/app.js",
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q server/dist/app.js\"",
-    "client": "npm start --prefix client"
+    "client": "npm start --prefix client",
+    "start:build": "npx tsc -w",
+    "start:run": "nodemon server/dist/app.js",
+    "dev": "concurrently npm:start:*"
   },
   "keywords": [],
   "author": "",

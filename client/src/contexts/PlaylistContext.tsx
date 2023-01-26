@@ -29,10 +29,6 @@ type searchTypes = {
   order: "ASC" | "DESC" | string;
 };
 
-interface PlaylistProps {
-  children: React.ReactNode;
-}
-
 type filterTypes = {
   singers: string[];
   genres: string[];
@@ -51,6 +47,16 @@ export const PlaylistContext = createContext<ContextProps>({
   setSelectedFilters: () => {},
 });
 
+interface PlaylistProps {
+  children: React.ReactNode;
+}
+
+type ResponseData = {
+  quantity: number;
+  playlist: Playlist[];
+  uniqueTypes: filterTypes;
+};
+
 // Fetching data from API
 const fetchMusicsByPage = async (
   page = 0,
@@ -64,7 +70,7 @@ const fetchMusicsByPage = async (
     filters
   );
 
-  return response.data;
+  return response.data as ResponseData;
 };
 
 function PlaylistContextProvider({ children }: PlaylistProps) {
@@ -111,14 +117,14 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
   if (isLoading) return <Loading />;
 
   const playlistValues: ContextProps = {
-    playlist: data.playlist,
-    pageCount: Math.ceil(data.quantity / dataPerPage),
+    playlist: data?.playlist ?? [],
+    pageCount: Math.ceil((data?.quantity ?? 0) / dataPerPage),
     currentPage,
     setCurrentPage,
     dataPerPage,
     type,
     handleTypeChange,
-    uniqueTypes: data.uniqueTypes,
+    uniqueTypes: data?.uniqueTypes ?? { singers: [], genres: [], years: [] },
     setSelectedFilters,
   };
 
