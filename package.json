@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix client",
-    "start:build": "npx tsc -w",
-    "start:run": "nodemon server/dist/app.js",
-    "dev": "concurrently npm:start:*"
+    "dev:build": "npx tsc -w",
+    "dev:run": "nodemon -q server/dist/app.js",
+    "dev": "concurrently npm:dev:*",
+    "build": "rimraf server/dist && npx tsc",
+    "start": "node server/dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +28,7 @@
     "concurrently": "^7.6.0",
     "jsdom": "^20.0.3",
     "nodemon": "^2.0.20",
+    "rimraf": "^4.1.2",
     "typescript": "^4.9.4"
   }
 }
