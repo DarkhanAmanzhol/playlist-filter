@@ -1,5 +1,5 @@
-const { Pool } = require("pg");
-const insertMusics = require("./insertMusics");
+import { Pool } from "pg";
+import insertMusics from "./insertMusics";
 
 const pool = new Pool({
   host: "postgres-db",
@@ -30,4 +30,4 @@ pool.on("connect", (client) => {
   client.query(insertMusics);
 });
 
-module.exports = pool;
+export default pool;

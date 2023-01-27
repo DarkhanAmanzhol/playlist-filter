@@ -1,5 +1,6 @@
-const pool = require("../database/postgresql");
-const { createFilteredQueries } = require("./helpers/query.helper");
+import pool from "../database/postgresql";
+import { createFilteredQueries } from "./helpers/query.helper";
+import { Filters, MusicProperties } from "../controllers/playlist.controller";
 
 async function getMusics(
   page = 0,
@@ -19,10 +20,11 @@ async function getMusics(
       page * perPage
     };`
   );
-  return playlist.rows;
+
+  return playlist.rows as MusicProperties[];
 }
 
-async function getQuantityMusics(filters) {
+async function getQuantityMusics(filters: Filters) {
   let query = `SELECT count(*) FROM playlist `;
 
   if (filters.singers?.length || filters.genres?.length || filters.years?.length) {
@@ -31,7 +33,7 @@ async function getQuantityMusics(filters) {
 
   const quantity = await pool.query(query);
 
-  return quantity.rows[0].count;
+  return quantity.rows[0].count as number;
 }
 
 async function getUniqueMusicTypes() {
@@ -39,7 +41,7 @@ async function getUniqueMusicTypes() {
   const genres = await pool.query("SELECT DISTINCT genre FROM playlist ORDER BY genre");
   const years = await pool.query("SELECT DISTINCT year FROM playlist ORDER BY year");
 
-  const uniqueTypes = {
+  const uniqueTypes: Filters = {
     singers: [],
     genres: [],
     years: [],
@@ -60,19 +62,14 @@ async function getUniqueMusicTypes() {
   return uniqueTypes;
 }
 
-async function postMusic({ singer, song, genre, year }) {
+async function postMusic({ singer, song, genre, year }: MusicProperties) {
   if (!singer || !song || !genre || !year) return false;
   const response = await pool.query(
     "INSERT INTO playlist (singer, song, genre, year) values ($1, $2, $3, $4) RETURNING *",
     [singer, song, genre, year]
   );
 
-  return response.rows[0];
+  return response.rows[0] as MusicProperties;
 }
 
-module.exports = {
-  getMusics,
-  getQuantityMusics,
-  getUniqueMusicTypes,
-  postMusic,
-};
+export { getMusics, getQuantityMusics, getUniqueMusicTypes, postMusic };

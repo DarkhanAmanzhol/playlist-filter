@@ -1,4 +1,4 @@
-const musics = require("./musics.json");
+import musics from "./musics.json";
 
 let insertMusics = `INSERT INTO playlist (id, singer, song, genre, year) VALUES `;
 
@@ -17,4 +17,4 @@ reducedMusics.forEach((music, index) => {
 
 insertMusics += ` ON CONFLICT (id) DO NOTHING;`;
 
-module.exports = insertMusics;
+export default insertMusics;

@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
 const playlistRouter = express.Router();
 
-const {
+import {
   getPlaylistController,
   // postMusicController,
-} = require("../controllers/playlist.controller");
+} from "../controllers/playlist.controller";
 
 playlistRouter.post("/", getPlaylistController);
 // playlistRouter.post("/", postMusicController);
 
-module.exports = playlistRouter;
+export default playlistRouter;

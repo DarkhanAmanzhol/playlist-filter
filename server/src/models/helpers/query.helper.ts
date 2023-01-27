@@ -1,5 +1,12 @@
-function createFilteredQueries(filters) {
+import { Filters } from "../../controllers/playlist.controller";
+
+export function createFilteredQueries(filters: Filters) {
   let query = ``;
+
+  if (!filters.singers) filters.singers = [];
+  if (!filters.genres) filters.genres = [];
+  if (!filters.years) filters.years = [];
+
   if (filters.singers.length) {
     query += `(singer = '${filters.singers[0]}' `;
     for (let i = 1; i < filters.singers.length; i++) {
@@ -27,5 +34,3 @@ function createFilteredQueries(filters) {
   if (filters.singers.length || filters.genres.length || filters.years.length) return `WHERE ` + query;
   return ``;
 }
-
-module.exports = { createFilteredQueries };

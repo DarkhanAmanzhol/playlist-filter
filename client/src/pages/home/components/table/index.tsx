@@ -1,8 +1,7 @@
-// css is global path: /client/src/pages/Home.css
 import React, { useContext } from "react";
 import "./style.css";
 import { PlaylistContext } from "contexts/PlaylistContext";
-import ArrowSort from "components/arrow-sort";
+import { ArrowSort } from "components/arrow-sort";
 import ReactPaginate from "react-paginate";
 
 function Table() {
@@ -54,7 +53,7 @@ function Table() {
         pageRangeDisplayed={10}
         pageCount={pageCount}
         previousLabel="< previous"
-        renderOnZeroPageCount={null}
+        renderOnZeroPageCount={() => null}
         containerClassName="pagination"
         pageLinkClassName="page-num"
         previousLinkClassName="page-num"
