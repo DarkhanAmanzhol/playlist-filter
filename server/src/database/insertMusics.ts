@@ -2,7 +2,7 @@ import musics from "./musics.json";
 
 let insertMusics = `INSERT INTO playlist (id, singer, song, genre, year) VALUES `;
 
-const reducedMusics = musics.slice(0, 100);
+const reducedMusics = musics.slice(0, 500);
 
 reducedMusics.forEach((music, index) => {
   if (index !== 0) {

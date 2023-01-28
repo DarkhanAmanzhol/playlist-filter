@@ -59,7 +59,7 @@ function Table() {
           nextLabel=">"
           onPageChange={(e) => setCurrentPage(e.selected)}
           forcePage={currentPage | 0}
-          pageRangeDisplayed={10}
+          pageRangeDisplayed={5}
           pageCount={pageCount}
           previousLabel="<"
           renderOnZeroPageCount={() => null}
