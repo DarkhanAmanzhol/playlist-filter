@@ -69,17 +69,19 @@ function Table() {
           nextLinkClassName="page-num"
           activeLinkClassName="page-num active"
         />
-        <div className="page-navigation__per-page">
-          {[10, 25, 50, 100].map((number) => (
-            <span
-              className={number === dataPerPage ? "active" : ""}
-              key={number}
-              onClick={(element) => setDataPerPage(+(element.target as HTMLButtonElement).innerHTML)}
-            >
-              {number}
-            </span>
-          ))}
-        </div>
+        {playlist.length ? (
+          <div className="page-navigation__per-page">
+            {[10, 25, 50, 100].map((number) => (
+              <span
+                className={number === dataPerPage ? "active" : ""}
+                key={number}
+                onClick={(element) => setDataPerPage(+(element.target as HTMLButtonElement).innerHTML)}
+              >
+                {number}
+              </span>
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

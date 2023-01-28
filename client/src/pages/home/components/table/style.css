@@ -54,6 +54,7 @@
 .page-navigation__per-page span {
   border: 1px solid black;
   padding: 10px;
+  cursor: pointer;
 }
 
 .page-navigation__per-page span.active {
