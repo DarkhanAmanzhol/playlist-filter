@@ -8,7 +8,7 @@
     "client": "npm start --prefix client",
     "dev:build": "npx tsc -w",
     "dev:run": "nodemon -q server/dist/app.js",
-    "dev": "concurrently npm:dev:*",
+    "dev": "npm run build && concurrently npm:dev:*",
     "build": "rimraf server/dist && npx tsc",
     "start": "node server/dist/app.js"
   },
