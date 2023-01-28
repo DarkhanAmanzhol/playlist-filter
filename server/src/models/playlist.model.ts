@@ -16,16 +16,16 @@ async function getMusics(
   const queryFilters = createFilteredQueries(filters);
 
   const playlist = await pool.query(
-    `SELECT * FROM playlist ${queryFilters} ORDER BY ${column} ${order} LIMIT ${perPage} OFFSET ${
-      page * perPage
-    };`
+    `SELECT playlist.id as id, singer, song, genre, year FROM playlist
+    INNER JOIN genres ON playlist.genre_id = genres.id
+     ${queryFilters} ORDER BY ${column} ${order} LIMIT ${perPage} OFFSET ${page * perPage};`
   );
 
   return playlist.rows as MusicProperties[];
 }
 
 async function getQuantityMusics(filters: Filters) {
-  let query = `SELECT count(*) FROM playlist `;
+  let query = `SELECT count(*) FROM playlist INNER JOIN genres ON playlist.genre_id = genres.id `;
 
   if (filters.singers?.length || filters.genres?.length || filters.years?.length) {
     query += createFilteredQueries(filters);
@@ -37,9 +37,9 @@ async function getQuantityMusics(filters: Filters) {
 }
 
 async function getUniqueMusicTypes() {
-  const singers = await pool.query("SELECT DISTINCT singer FROM playlist ORDER BY singer");
-  const genres = await pool.query("SELECT DISTINCT genre FROM playlist ORDER BY genre");
-  const years = await pool.query("SELECT DISTINCT year FROM playlist ORDER BY year");
+  const singers = await pool.query("SELECT DISTINCT singer FROM playlist ORDER BY singer;");
+  const genres = await pool.query("SELECT genre FROM genres ORDER BY genre;");
+  const years = await pool.query("SELECT DISTINCT year FROM playlist ORDER BY year;");
 
   const uniqueTypes: Filters = {
     singers: [],
@@ -63,10 +63,19 @@ async function getUniqueMusicTypes() {
 }
 
 async function postMusic({ singer, song, genre, year }: MusicProperties) {
+  let genre_id = 0;
   if (!singer || !song || !genre || !year) return false;
+
+  const genres = await pool.query("SELECT genre FROM genres ORDER BY genre;");
+  if (genres.rows[0].includes(genre)) genre_id = genres.rows[0].indexOf(genre) + 1;
+  else {
+    await pool.query(`INSERT INTO genres (genre) values (${genre})`);
+    genre_id = genres.rowCount + 1;
+  }
+
   const response = await pool.query(
     "INSERT INTO playlist (singer, song, genre, year) values ($1, $2, $3, $4) RETURNING *",
-    [singer, song, genre, year]
+    [singer, song, genre_id, year]
   );
 
   return response.rows[0] as MusicProperties;

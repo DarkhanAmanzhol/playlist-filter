@@ -31,7 +31,7 @@ async function getMusics() {
 
   dom.window.document
     .querySelectorAll(".wikitable td:nth-child(4)")
-    .forEach((node, index) => (musics[index].genre = node.textContent.trim()));
+    .forEach((node, index) => (musics[index].genre = node.textContent.trim().toLowerCase()));
 
   fs.writeFileSync(path.join(__dirname, "..", "src", "database", "musics.json"), JSON.stringify(musics));
 }
