@@ -14,15 +14,16 @@
 }
 
 .page-num {
+  color: black;
   padding: 8px 15px;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 5px;
-  background-color: aqua;
+  border-radius: 25px;
 }
 
 .pagination .active {
-  background-color: bisque;
+  background-color: rgb(239, 232, 232);
+  border: 1px solid grey;
 }
 
 .playlist-table td:nth-child(1) {

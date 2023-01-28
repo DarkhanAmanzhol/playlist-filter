@@ -47,12 +47,12 @@ function Table() {
       </table>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">"
         onPageChange={(e) => setCurrentPage(e.selected)}
         forcePage={currentPage | 0}
         pageRangeDisplayed={10}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="<"
         renderOnZeroPageCount={() => null}
         containerClassName="pagination"
         pageLinkClassName="page-num"
