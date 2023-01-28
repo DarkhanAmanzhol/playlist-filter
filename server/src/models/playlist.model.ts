@@ -4,7 +4,7 @@ import { Filters, MusicProperties } from "../controllers/playlist.controller";
 
 async function getMusics(
   page = 0,
-  perPage = 20,
+  perPage = 25,
   column = "singer",
   order = "ASC",
   filters = {

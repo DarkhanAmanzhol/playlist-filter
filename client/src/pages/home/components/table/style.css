@@ -1,3 +1,6 @@
+#home-table {
+  position: relative;
+}
 .table,
 .table th {
   position: relative;
@@ -40,4 +43,19 @@
 }
 .playlist-table td:nth-child(5) {
   width: 10%;
+}
+
+.page-navigation__per-page {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.page-navigation__per-page span {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.page-navigation__per-page span.active {
+  background-color: rgb(175, 159, 159);
 }

@@ -5,11 +5,19 @@ import { ArrowSort } from "components/arrow-sort";
 import ReactPaginate from "react-paginate";
 
 function Table() {
-  const { playlist, pageCount, currentPage, setCurrentPage, dataPerPage, type, handleTypeChange } =
-    useContext(PlaylistContext);
+  const {
+    playlist,
+    pageCount,
+    currentPage,
+    setCurrentPage,
+    dataPerPage,
+    setDataPerPage,
+    type,
+    handleTypeChange,
+  } = useContext(PlaylistContext);
 
   return (
-    <>
+    <section id="home-table">
       <table className="table table-striped playlist-table">
         <thead>
           <tr>
@@ -45,22 +53,35 @@ function Table() {
             ))}
         </tbody>
       </table>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={(e) => setCurrentPage(e.selected)}
-        forcePage={currentPage | 0}
-        pageRangeDisplayed={10}
-        pageCount={pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={() => null}
-        containerClassName="pagination"
-        pageLinkClassName="page-num"
-        previousLinkClassName="page-num"
-        nextLinkClassName="page-num"
-        activeLinkClassName="page-num active"
-      />
-    </>
+      <div className="page-navigation">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={(e) => setCurrentPage(e.selected)}
+          forcePage={currentPage | 0}
+          pageRangeDisplayed={10}
+          pageCount={pageCount}
+          previousLabel="<"
+          renderOnZeroPageCount={() => null}
+          containerClassName="pagination"
+          pageLinkClassName="page-num"
+          previousLinkClassName="page-num"
+          nextLinkClassName="page-num"
+          activeLinkClassName="page-num active"
+        />
+        <div className="page-navigation__per-page">
+          {[10, 25, 50, 100].map((number) => (
+            <span
+              className={number === dataPerPage ? "active" : ""}
+              key={number}
+              onClick={(element) => setDataPerPage(+(element.target as HTMLButtonElement).innerHTML)}
+            >
+              {number}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

@@ -10,6 +10,7 @@ export interface ContextProps {
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   dataPerPage: number;
+  setDataPerPage: React.Dispatch<React.SetStateAction<number>>;
   type: searchTypes;
   handleTypeChange: (nameColumn: string) => void;
   uniqueTypes: filterTypes;
@@ -41,6 +42,7 @@ export const PlaylistContext = createContext<ContextProps>({
   currentPage: 0,
   setCurrentPage: () => {},
   dataPerPage: 0,
+  setDataPerPage: () => {},
   type: { column: "singer", order: "ASC" },
   handleTypeChange: () => {},
   uniqueTypes: { singers: [], genres: [], years: [] },
@@ -60,7 +62,7 @@ type ResponseData = {
 // Fetching data from API
 const fetchMusicsByPage = async (
   page = 0,
-  perPage = 20,
+  perPage = 25,
   column = "singer",
   order = "ASC",
   filters: filterTypes
@@ -76,8 +78,8 @@ const fetchMusicsByPage = async (
 function PlaylistContextProvider({ children }: PlaylistProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const dataPerPage = parseInt(searchParams.get("perPage") || "20");
-  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get("page") || "0"));
+  const [dataPerPage, setDataPerPage] = useState(+(searchParams.get("perPage") || "25"));
+  const [currentPage, setCurrentPage] = useState(+(searchParams.get("page") || "0"));
   const [type, setType] = useState({
     column: searchParams.get("column") || "singer",
     order: searchParams.get("order") || "ASC",
@@ -109,7 +111,7 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
   }, [currentPage, dataPerPage, type]);
 
   const { data, isLoading } = useQuery(
-    ["playlist", currentPage, type.column, type.order, selectedFilters],
+    ["playlist", currentPage, dataPerPage, type.column, type.order, selectedFilters],
     () => fetchMusicsByPage(currentPage, dataPerPage, type.column, type.order, selectedFilters),
     { keepPreviousData: true }
   );
@@ -122,6 +124,7 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
     currentPage,
     setCurrentPage,
     dataPerPage,
+    setDataPerPage,
     type,
     handleTypeChange,
     uniqueTypes: data?.uniqueTypes ?? { singers: [], genres: [], years: [] },
