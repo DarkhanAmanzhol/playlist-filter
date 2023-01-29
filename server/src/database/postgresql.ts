@@ -18,7 +18,9 @@ const pool = new Pool({
 // });
 
 pool.on("connect", (client) => {
-  client.query(`CREATE TABLE IF NOT EXISTS playlist(
+  client
+    .query(
+      `CREATE TABLE IF NOT EXISTS playlist(
                   id SERIAL PRIMARY KEY,
                   singer VARCHAR(255),
                   song VARCHAR(255),
@@ -26,8 +28,15 @@ pool.on("connect", (client) => {
                   year INTEGER);
                 
                 CREATE TABLE IF NOT EXISTS genres(
-                  id SERIAL primary key,
-                  genre VARCHAR(255));`);
+                  id SERIAL PRIMARY KEY,
+                  genre VARCHAR(255));`
+    )
+    .catch((e) => {
+      if (e.code == "23505") {
+        console.log("\n ERROR! \n Individual with name: something is a duplicate. \n");
+      }
+    });
+  client.query;
 
   // Initialize database
   client.query(insertAll);
