@@ -28,12 +28,19 @@ async function getPlaylistController(req: Request, res: Response) {
 
   const playlist = await getMusics(page, perPage, column, order, filters);
   const quantity = await getQuantityMusics(filters);
-  const uniqueTypes = await getUniqueMusicTypes();
 
   return res.status(200).json({
     status: "success",
     quantity,
     playlist,
+  });
+}
+
+async function getUniqueMusicTypesController(req: Request, res: Response) {
+  const uniqueTypes = await getUniqueMusicTypes();
+
+  return res.status(200).json({
+    status: "success",
     uniqueTypes,
   });
 }
@@ -56,4 +63,4 @@ async function postMusicController(req: Request, res: Response) {
   }
 }
 
-export { getPlaylistController, postMusicController };
+export { getPlaylistController, getUniqueMusicTypesController, postMusicController };

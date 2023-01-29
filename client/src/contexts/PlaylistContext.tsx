@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQueries } from "react-query";
 import { useSearchParams } from "react-router-dom";
 import Loading from "../components/slider";
 
@@ -15,6 +15,7 @@ export interface ContextProps {
   handleTypeChange: (nameColumn: string) => void;
   uniqueTypes: filterTypes;
   setSelectedFilters: React.Dispatch<React.SetStateAction<filterTypes>>;
+  isPlaylistLoading: boolean;
 }
 
 type Playlist = {
@@ -47,6 +48,7 @@ export const PlaylistContext = createContext<ContextProps>({
   handleTypeChange: () => {},
   uniqueTypes: { singers: [], genres: [], years: [] },
   setSelectedFilters: () => {},
+  isPlaylistLoading: false,
 });
 
 interface PlaylistProps {
@@ -56,7 +58,6 @@ interface PlaylistProps {
 type ResponseData = {
   quantity: number;
   playlist: Playlist[];
-  uniqueTypes: filterTypes;
 };
 
 // Fetching data from API
@@ -67,12 +68,22 @@ const fetchMusicsByPage = async (
   order = "ASC",
   filters: filterTypes
 ) => {
+  console.log("Loading fetch 1");
   const response = await axios.post(
     `/api/playlist?page=${page}&perPage=${perPage}&column=${column}&order=${order}`,
     filters
   );
 
   return response.data as ResponseData;
+};
+
+const fetchUniqueTypes = async () => {
+  console.log("Loading fetch 2");
+  const response = await axios.get("/api/playlist/music-type-list");
+
+  const uniqueTypes = response.data?.uniqueTypes as filterTypes;
+
+  return uniqueTypes;
 };
 
 function PlaylistContextProvider({ children }: PlaylistProps) {
@@ -110,25 +121,32 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
     });
   }, [currentPage, dataPerPage, type]);
 
-  const { data, isLoading } = useQuery(
-    ["playlist", currentPage, dataPerPage, type.column, type.order, selectedFilters],
-    () => fetchMusicsByPage(currentPage, dataPerPage, type.column, type.order, selectedFilters),
-    { keepPreviousData: true }
-  );
+  const [playlistQuery, uniqueTypesQuery] = useQueries([
+    {
+      queryKey: ["playlist", currentPage, dataPerPage, type.column, type.order, selectedFilters],
+      queryFn: () =>
+        fetchMusicsByPage(currentPage, dataPerPage, type.column, type.order, selectedFilters),
+    },
+    {
+      queryKey: ["music-type-list"],
+      queryFn: fetchUniqueTypes,
+    },
+  ]);
 
-  if (isLoading) return <Loading />;
+  if (playlistQuery.isLoading && uniqueTypesQuery.isLoading) return <Loading />;
 
   const playlistValues: ContextProps = {
-    playlist: data?.playlist ?? [],
-    pageCount: Math.ceil((data?.quantity ?? 0) / dataPerPage),
+    playlist: playlistQuery.data?.playlist ?? [],
+    pageCount: Math.ceil((playlistQuery.data?.quantity ?? 0) / dataPerPage),
     currentPage,
     setCurrentPage,
     dataPerPage,
     setDataPerPage,
     type,
     handleTypeChange,
-    uniqueTypes: data?.uniqueTypes ?? { singers: [], genres: [], years: [] },
+    uniqueTypes: uniqueTypesQuery.data ?? { singers: [], genres: [], years: [] },
     setSelectedFilters,
+    isPlaylistLoading: playlistQuery.isLoading,
   };
 
   return <PlaylistContext.Provider value={playlistValues}>{children}</PlaylistContext.Provider>;

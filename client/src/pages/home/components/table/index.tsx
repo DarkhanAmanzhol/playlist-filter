@@ -3,6 +3,7 @@ import "./style.css";
 import { PlaylistContext } from "contexts/PlaylistContext";
 import { ArrowSort } from "components/arrow-sort";
 import ReactPaginate from "react-paginate";
+import Loading from "components/slider";
 
 function Table() {
   const {
@@ -14,9 +15,10 @@ function Table() {
     setDataPerPage,
     type,
     handleTypeChange,
+    isPlaylistLoading,
   } = useContext(PlaylistContext);
 
-  return (
+  return playlist.length ? (
     <section id="home-table">
       <table className="table table-striped playlist-table">
         <thead>
@@ -69,7 +71,7 @@ function Table() {
           nextLinkClassName="page-num"
           activeLinkClassName="page-num active"
         />
-        {playlist.length ? (
+        {isPlaylistLoading ? (
           <div className="page-navigation__per-page">
             {[10, 25, 50, 100].map((number) => (
               <span
@@ -84,6 +86,8 @@ function Table() {
         ) : null}
       </div>
     </section>
+  ) : (
+    <Loading />
   );
 }
 
