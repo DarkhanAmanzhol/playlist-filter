@@ -15,7 +15,7 @@ export interface ContextProps {
   handleTypeChange: (nameColumn: string) => void;
   uniqueTypes: filterTypes;
   setSelectedFilters: React.Dispatch<React.SetStateAction<filterTypes>>;
-  isPlaylistLoading: boolean;
+  isFetching: boolean;
 }
 
 type Playlist = {
@@ -48,7 +48,7 @@ export const PlaylistContext = createContext<ContextProps>({
   handleTypeChange: () => {},
   uniqueTypes: { singers: [], genres: [], years: [] },
   setSelectedFilters: () => {},
-  isPlaylistLoading: false,
+  isFetching: true,
 });
 
 interface PlaylistProps {
@@ -146,7 +146,7 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
     handleTypeChange,
     uniqueTypes: uniqueTypesQuery.data ?? { singers: [], genres: [], years: [] },
     setSelectedFilters,
-    isPlaylistLoading: playlistQuery.isLoading,
+    isFetching: playlistQuery.isFetching,
   };
 
   return <PlaylistContext.Provider value={playlistValues}>{children}</PlaylistContext.Provider>;

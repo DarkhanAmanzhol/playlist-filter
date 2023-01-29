@@ -8,6 +8,7 @@ function Filter() {
   const context = useContext(PlaylistContext);
   const uniqueTypes = context?.uniqueTypes;
   const setSelectedFilters = context?.setSelectedFilters;
+  const setCurrentPage = context?.setCurrentPage;
 
   const [selectedSingers, setSelectedSingers] = useState<{ value: string }[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<{ value: string }[]>([]);
@@ -18,7 +19,7 @@ function Filter() {
   const yearOptions = parseToOptionsArray(uniqueTypes.years);
 
   useEffect(() => {
-    console.log(selectedSingers);
+    setCurrentPage(0);
     setSelectedFilters({
       singers: selectedSingers.map((item) => item["value"]),
       genres: selectedGenres.map((item) => item["value"]),

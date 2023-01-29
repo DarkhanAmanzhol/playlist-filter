@@ -15,7 +15,7 @@ function Table() {
     setDataPerPage,
     type,
     handleTypeChange,
-    isPlaylistLoading,
+    isFetching,
   } = useContext(PlaylistContext);
 
   return playlist.length ? (
@@ -71,7 +71,7 @@ function Table() {
           nextLinkClassName="page-num"
           activeLinkClassName="page-num active"
         />
-        {isPlaylistLoading ? (
+        {playlist.length ? (
           <div className="page-navigation__per-page">
             {[10, 25, 50, 100].map((number) => (
               <span
@@ -86,8 +86,10 @@ function Table() {
         ) : null}
       </div>
     </section>
-  ) : (
+  ) : isFetching ? (
     <Loading />
+  ) : (
+    <div>No data found</div>
   );
 }
 

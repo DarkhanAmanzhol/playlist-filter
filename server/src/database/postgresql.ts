@@ -26,7 +26,7 @@ pool.on("connect", (client) => {
                   song VARCHAR(255),
                   genre_id INTEGER,
                   year INTEGER);
-                
+
                 CREATE TABLE IF NOT EXISTS genres(
                   id SERIAL PRIMARY KEY,
                   genre VARCHAR(255));`
