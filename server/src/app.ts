@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import path from "path";
 import { config } from "dotenv";
 
-config({ path: path.join(__dirname, "..", ".env") });
+config({ path: path.join(__dirname, "prisma", ".env") });
 
 import api from "./routes/api";
 const app = express();
@@ -17,7 +17,7 @@ app.get("/.*/", (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "..", "public", "index.html"))
 );
 
-const PORT = process.env.PORT ?? 5000;
+const PORT = Number(process.env.PORT ?? 5000);
 
 app.listen(PORT, () => {
   console.log(`Server is started in port ${PORT}`);

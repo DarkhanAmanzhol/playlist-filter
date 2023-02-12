@@ -6,8 +6,9 @@ import {
   getUniqueMusicTypesController,
   // postMusicController,
 } from "../controllers/playlist.controller";
+import { playlistValidation } from "../middlewares/playlist.middleware";
 
-playlistRouter.post("/", getPlaylistController);
+playlistRouter.post("/", [playlistValidation], getPlaylistController);
 playlistRouter.get("/music-type-list", getUniqueMusicTypesController);
 // playlistRouter.post("/", postMusicController);
 

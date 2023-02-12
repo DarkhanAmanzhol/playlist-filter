@@ -21,7 +21,7 @@ export const ArrowSort: React.FC<Props> = ({ nameColumn, type, onChangeType }) =
         className="arrows__img"
         src={
           type.column === nameColumn
-            ? type.order === "ASC"
+            ? type.order === "asc"
               ? triangleDownSvg
               : triangleUpSvg
             : doubleTriangle

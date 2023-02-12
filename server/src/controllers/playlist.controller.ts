@@ -4,8 +4,8 @@ import { getMusics, getQuantityMusics, getUniqueMusicTypes, postMusic } from "..
 export type Query = {
   page?: number;
   perPage?: number;
-  column?: "singer" | "genre" | "year";
-  order?: "ASC" | "DESC";
+  column?: "singer" | "song" | "genre" | "year";
+  order?: "asc" | "desc";
 };
 
 export interface MusicProperties {
@@ -16,9 +16,9 @@ export interface MusicProperties {
 }
 
 export type Filters = {
-  singers: string[];
-  genres: string[];
-  years: string[];
+  singers?: string[];
+  genres?: string[];
+  years?: number[];
 };
 
 async function getPlaylistController(req: Request, res: Response) {

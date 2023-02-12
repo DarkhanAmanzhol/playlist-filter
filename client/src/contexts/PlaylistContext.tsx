@@ -19,16 +19,23 @@ export interface ContextProps {
 }
 
 type Playlist = {
-  id: number;
-  singer: string;
-  song: string;
-  genre: string;
-  year: number;
+  playlistId: number;
+  songId: number;
+  song: {
+    song_name: string;
+    year: number;
+    genre: {
+      genre_name: string;
+    };
+    singer: {
+      singer_name: string;
+    };
+  };
 };
 
 type searchTypes = {
   column: "singer" | "genre" | "year" | string;
-  order: "ASC" | "DESC" | string;
+  order: "asc" | "desc";
 };
 
 type filterTypes = {
@@ -44,7 +51,7 @@ export const PlaylistContext = createContext<ContextProps>({
   setCurrentPage: () => {},
   dataPerPage: 0,
   setDataPerPage: () => {},
-  type: { column: "singer", order: "ASC" },
+  type: { column: "singer", order: "asc" },
   handleTypeChange: () => {},
   uniqueTypes: { singers: [], genres: [], years: [] },
   setSelectedFilters: () => {},
@@ -65,7 +72,7 @@ const fetchMusicsByPage = async (
   page = 0,
   perPage = 25,
   column = "singer",
-  order = "ASC",
+  order = "asc",
   filters: filterTypes
 ) => {
   console.log("Loading fetch 1");
@@ -73,6 +80,8 @@ const fetchMusicsByPage = async (
     `/api/playlist?page=${page}&perPage=${perPage}&column=${column}&order=${order}`,
     filters
   );
+
+  console.log("Playlist:", response.data);
 
   return response.data as ResponseData;
 };
@@ -82,7 +91,7 @@ const fetchUniqueTypes = async () => {
   const response = await axios.get("/api/playlist/music-type-list");
 
   const uniqueTypes = response.data?.uniqueTypes as filterTypes;
-
+  console.log("uniqueTypes:", uniqueTypes);
   return uniqueTypes;
 };
 
@@ -93,7 +102,7 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
   const [currentPage, setCurrentPage] = useState(+(searchParams.get("page") || "0"));
   const [type, setType] = useState({
     column: searchParams.get("column") || "singer",
-    order: searchParams.get("order") || "ASC",
+    order: searchParams.get("order") || "asc",
   } as searchTypes);
 
   const [selectedFilters, setSelectedFilters] = useState({
@@ -103,12 +112,12 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
   } as filterTypes);
 
   const handleTypeChange = (nameColumn: string) => {
-    const newOrder = type.order === "ASC" ? "DESC" : "ASC";
+    const newOrder = type.order === "asc" ? "desc" : "asc";
 
     setType((prevType) =>
       prevType.column === nameColumn
         ? { ...prevType, order: newOrder }
-        : { column: nameColumn, order: "ASC" }
+        : { column: nameColumn, order: "asc" }
     );
   };
 
@@ -116,8 +125,8 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
     setSearchParams({
       page: currentPage.toString(),
       perPage: dataPerPage.toString(),
-      column: type.column,
-      order: type.order,
+      column: type.column.toString(),
+      order: type.order.toString(),
     });
   }, [currentPage, dataPerPage, type]);
 

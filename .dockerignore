@@ -1,7 +1,7 @@
-*/node_modules
+node_modules
 .git
 .gitignore
 /client/README.md
-/server/database.sql
 /server/web-scraping
 README.md
+/server/src/prisma/.env
