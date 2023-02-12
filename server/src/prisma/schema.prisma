@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Playlist and Song tables has many to many relationships. To solve this was used intermediate table named SongsInPlaylist (saves ids)
+// Songs has foreign key relations with Genres and Singers table 
+model Playlist {
+  id        Int               @id @default(autoincrement())
+  createdAt DateTime          @default(now())
+  songsId   SongsInPlaylist[]
+}
+
+model SongsInPlaylist {
+  playlistId Int
+  songId     Int
+  playlist   Playlist @relation(fields: [playlistId], references: [id])
+  song       Song     @relation(fields: [songId], references: [id])
+
+  @@unique([playlistId, songId])
+}
+
+model Song {
+  id          Int               @id @default(autoincrement())
+  song_name   String
+  year        Int
+  singerId    Int
+  genreId     Int
+  createdAt   DateTime          @default(now())
+  singer      Singer            @relation(fields: [singerId], references: [id])
+  genre       Genre             @relation(fields: [genreId], references: [id])
+  playlistsId SongsInPlaylist[]
+}
+
+model Genre {
+  id         Int      @id @default(autoincrement())
+  genre_name String   @db.VarChar(255)
+  createdAt  DateTime @default(now())
+  songs      Song[]
+}
+
+model Singer {
+  id          Int      @id @default(autoincrement())
+  singer_name String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  songs       Song[]
+}

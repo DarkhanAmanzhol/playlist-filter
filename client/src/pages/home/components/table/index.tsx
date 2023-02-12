@@ -45,12 +45,12 @@ function Table() {
         <tbody>
           {playlist &&
             playlist.map((music, index) => (
-              <tr key={music.id}>
+              <tr key={music.songId}>
                 <td>{index + 1 + currentPage * dataPerPage}</td>
-                <td>{music.singer}</td>
-                <td>{music.song}</td>
-                <td>{music.genre}</td>
-                <td>{music.year}</td>
+                <td>{music.song.singer.singer_name}</td>
+                <td>{music.song.song_name}</td>
+                <td>{music.song.genre.genre_name}</td>
+                <td>{music.song.year}</td>
               </tr>
             ))}
         </tbody>
