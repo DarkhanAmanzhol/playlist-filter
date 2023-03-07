@@ -25,7 +25,7 @@ function Filter() {
       genres: selectedGenres.map((item) => item["value"]),
       years: selectedYears.map((item) => item["value"]),
     });
-  }, [selectedSingers, selectedGenres, selectedYears]);
+  }, [selectedSingers, selectedGenres, selectedYears, setCurrentPage, setSelectedFilters]);
 
   // TODO: Somehow change the type of the option of any!
   return (

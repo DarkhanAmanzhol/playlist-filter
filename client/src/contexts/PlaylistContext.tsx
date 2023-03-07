@@ -128,7 +128,7 @@ function PlaylistContextProvider({ children }: PlaylistProps) {
       column: type.column.toString(),
       order: type.order.toString(),
     });
-  }, [currentPage, dataPerPage, type]);
+  }, [currentPage, dataPerPage, type, setSearchParams]);
 
   const [playlistQuery, uniqueTypesQuery] = useQueries([
     {
