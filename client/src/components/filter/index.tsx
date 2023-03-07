@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.css";
-import { PlaylistContext } from "contexts/PlaylistContext";
-import { parseToOptionsArray } from "./lib";
+import { PlaylistContext } from "../../contexts/PlaylistContext";
+import { parseToOptionsArray } from "../../helpers/parseToOptionsArray";
 import Select from "react-select";
 
 function Filter() {

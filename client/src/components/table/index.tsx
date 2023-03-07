@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import "./style.css";
-import { PlaylistContext } from "contexts/PlaylistContext";
-import { ArrowSort } from "components/arrow-sort";
+import { PlaylistContext } from "../../contexts/PlaylistContext";
+import { ArrowSort } from "../ui/arrow-sort";
 import ReactPaginate from "react-paginate";
-import Loading from "components/slider";
+import Loading from "../ui/slider";
 
 function Table() {
   const {

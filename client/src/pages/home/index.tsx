@@ -1,6 +1,6 @@
 import React from "react";
-import Table from "./components/table";
-import Filter from "./components/filter";
+import Table from "../../components/table";
+import Filter from "../../components/filter";
 import "./style.css";
 
 function Home() {

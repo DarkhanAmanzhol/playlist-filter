@@ -31,5 +31,3 @@ export const ArrowSort: React.FC<Props> = ({ nameColumn, type, onChangeType }) =
     </div>
   );
 };
-
-// export default ArrowSort;
