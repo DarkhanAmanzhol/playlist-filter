@@ -13,28 +13,27 @@
     "start": "node server/dist/app.js",
     "migrate": "npx prisma migrate dev -n init",
     "migrate:docker": "npx prisma migrate dev -n init --schema=./server/dist/prisma/schema.prisma --skip-seed && node ./server/dist/prisma/seed.js"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^4.9.0",
+    "@prisma/client": "^4.11.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "pg": "^8.8.0"
+    "pg": "^8.10.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.15",
-    "@types/node": "^18.11.18",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.6",
     "@types/pg": "^8.6.6",
-    "axios": "^1.2.1",
+    "axios": "^1.3.4",
     "concurrently": "^7.6.0",
     "jsdom": "^20.0.3",
-    "nodemon": "^2.0.20",
-    "prisma": "^4.9.0",
-    "rimraf": "^4.1.2",
-    "typescript": "^4.9.4"
+    "nodemon": "^2.0.21",
+    "prisma": "^4.11.0",
+    "rimraf": "^4.3.1",
+    "typescript": "^4.9.5"
   },
   "prisma": {
     "schema": "./server/src/prisma/schema.prisma",
