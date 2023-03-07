@@ -24,7 +24,7 @@ export type Filters = {
 async function getPlaylistController(req: Request, res: Response) {
   const query: Query = req.query;
   const { page, perPage, column, order } = query;
-  const filters = req.body;
+  const filters: Filters = req.body;
 
   const playlist = await getMusics(page, perPage, column, order, filters);
   const quantity = await getQuantityMusics(filters);
